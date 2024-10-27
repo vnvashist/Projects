@@ -6,8 +6,6 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from sklearn.metrics import mean_squared_error
-from keras.callback import EarlyStopping
-from kerastuner import HyperModel, RandomSearch
 # Step 1: Download the data
 ticker = 'AAPL'
 data = yf.download(ticker, start='2010-01-01', end='2024-10-26')
