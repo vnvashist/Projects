@@ -76,18 +76,40 @@ test_rmse = np.sqrt(mean_squared_error(test_actual, test_predict))
 
 print(f'Train RMSE: {train_rmse}, Test RMSE: {test_rmse}')
 
+# Step 7: Forecasting
+# Specify the number of steps to forecast
+forecast_steps = 100  # Number of future steps to predict
+
+# Prepare the input for forecasting
+forecast_input = scaled_data[-time_step:].reshape(1, time_step, 1)
+
+# Forecast future values
+forecast_output = []
+for _ in range(forecast_steps):
+    # Make prediction
+    next_step = model.predict(forecast_input)
+    forecast_output.append(next_step[0, 0])
+
+    # Update the forecast input
+    # Shift the input data, add the prediction to the end
+    forecast_input = np.append(forecast_input[:, 1:, :], next_step.reshape(1, 1, 1), axis=1)
+
+# Inverse transform the forecasted values
+forecast_output = scaler.inverse_transform(np.array(forecast_output).reshape(-1, 1))
+
 # Step 7: Plot the results
 plt.figure(figsize=(14, 5))
 plt.plot(np.arange(time_step, time_step + len(train_predict)), train_predict, label='Train Predictions', color='green')
-
-# Plotting the test predictions with similar adjustments
-plt.plot(np.arange(train_size + (time_step * 2), train_size + (time_step * 2) + len(test_predict)), test_predict, label='Test Predictions', color='blue')
-
-# Actual data for reference
+plt.plot(np.arange(train_size + (time_step * 2), train_size + (time_step * 2) + len(test_predict)), test_predict, label='Test Predictions',
+         color='blue')
 plt.plot(data, label='Actual Data', color='red')
+
+# Plotting the forecasted values
+forecast_index = np.arange(len(data), len(data) + forecast_steps)
+plt.plot(forecast_index, forecast_output, label='Forecast', color='orange')
 
 plt.xlabel("Time")
 plt.ylabel("Stock Price")
-plt.title("Apple Stock Price Prediction using LSTM")
+plt.title("Apple Stock Price Prediction using LSTM with Forecasting")
 plt.legend()
 plt.show()
