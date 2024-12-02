@@ -10,7 +10,7 @@ warnings.filterwarnings('ignore')
 stock = 'VOO'
 
 # Time period
-start_date = '2022-01-01'
+start_date = '2021-01-01'
 end_date = datetime.datetime.now().strftime('%Y-%m-%d')
 
 # Fetch data
