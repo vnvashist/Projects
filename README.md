@@ -9,6 +9,7 @@ I had recently gotten into investing and naturally, like many of my peers, was i
 
 <ins> Initialization and Justification </ins>
 \
+\
   I decided to predict AAPL (Apple) stock as it had a tremendous amount of historical data we could work with (ranging back from Dec.12 1980). 
   \
   Here are the layers in my neural net: \
