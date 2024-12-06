@@ -6,7 +6,7 @@
 # Trading Bot S&P
 - I was interested in creating an algo trading bot that would automatically make trades for me on the strategy 'buy at the dip'. This bot used simple python if-else statements but used various finance metrics like moving averages and rsi to make decisions on when to buy and sell.
 
-Some Initialization Parameters:
+<ins> Some Initialization Parameters: </ins>
   - Starting Capital : $100,000
   - Oversold/Underbought Ratio : 35:65
   - Stop-Loss Percentage : 0.10 (10%)
@@ -17,7 +17,7 @@ Some Initialization Parameters:
 - ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True)
 - Awesome, the bot outperforms the market by a whopping 21%!
 
-Points of Improvement
+<ins> Points of Improvement </ins>
   - Success.... right? Well unfortunately not really... This whole time I was backtesting on the single year and realized that I had not checked for any other years. Afterall, how useful is a bot that can only perform if you magically started on the year 2022.
   
   - And of course... my fears were confirmed. The bot did not perform as well on every other year I checked. Attached above is checking from 2021-01-01 onward, but similar results were replicated for 2020, 2023, 2019, and onwards. Almost every other year I could have entered the market, the bot would underperform...
