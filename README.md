@@ -4,7 +4,21 @@
 [Trading Bot S&P](#trading-bot-sp)
 
 # LSTM with Stock Forecasting
-- Using deep learning I created a stock forecasting model that inputted single stock close values and outputted 30-100 day forecasts.
+\
+I had recently gotten into investing and naturally, like many of my peers, was interested to see how I could incorporate machine learning to optimize my investments. Of course, a brief google search will tell you machine learning models for stock prediction are generally not recommended due to the complexity and number of observations you would have to capture to accurately make any meaningful predictions, but... that didn't stop me.
+
+<ins> Important Code Snippets </ins>
+\
+  I decided to predict AAPL (Apple) stock as it had a tremendous amount of historical data we could work with (ranging back from Dec.12 1980). 
+  \
+  Here are the layers in my neural net: \
+    LSTM \
+    Dropout \
+    LSTM \
+    Dropout \
+    Dense \
+  \
+  
 
 # Trading Bot S&P 
 \
