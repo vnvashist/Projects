@@ -1,4 +1,4 @@
-### Projects
+# Projects
 
 # LSTM with Stock Forecasting
 - Using deep learning I created a stock forecasting model that inputted single stock close values and outputted 30-100 day forecasts.
