@@ -16,7 +16,7 @@
   \
   Here's the data if the test is run starting from 2022-01-01 to current day (2024-12-06). \
   \
-  ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True) \
+  ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True) 
   \
   Awesome, the bot outperforms the market by a whopping 21%! \
 
@@ -25,7 +25,7 @@
   
   And of course... my fears were confirmed. \
   \
-  ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202021.png?raw=True) \ 
-  
+  ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202021.png?raw=True)
+  \
   The bot did not perform as well on every other year I checked. Attached above is checking from 2021-01-01 onward, but similar results were replicated for 2020, 2023, 2019, and onwards. Almost every other year I could have entered the market, the bot would underperform...
   
