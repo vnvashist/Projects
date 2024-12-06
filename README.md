@@ -13,9 +13,13 @@ I was interested in creating an algo trading bot that would automatically make t
 <ins> Some Initialization Parameters: </ins> \
 \
   Starting Capital : $100,000
+  \
   Oversold/Underbought Ratio : 35:65
+  \
   Stop-Loss Percentage : 0.10 (10%)
+  \
   Profit Sell Signal : 0.20 (20%)
+  \
  
   Using these parameters, I created a bot using simple if-else statements in python to loop through historical data (backtesting). Once the bot validates that all the conditions have passed it will either conduct it's buy or sell signal. \
   \
