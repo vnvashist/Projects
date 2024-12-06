@@ -21,6 +21,7 @@
   Awesome, the bot outperforms the market by a whopping 21%! \
 
 <ins> Points of Improvement </ins> \
+\
   Success.... right? Well unfortunately not really... This whole time I was backtesting on the single year and realized that I had not checked for any other years. Afterall, how useful is a bot that can only perform if you magically started on the year 2022.
   
   And of course... my fears were confirmed. \
