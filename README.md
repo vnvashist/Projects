@@ -18,7 +18,7 @@
   \
   ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True) 
   \
-  Awesome, the bot outperforms the market by a whopping 21%! \
+  Awesome, the bot outperforms the market by a whopping 21%! 
 
 <ins> Points of Improvement </ins> \
 \
