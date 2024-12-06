@@ -1,5 +1,6 @@
 # Projects
 [LSTM with Stock Forecasting](#https://github.com/vnvashist/Projects/blob/master/README.md#lstm-with-stock-forecasting)
+\
 [Trading Bot S&P](#https://github.com/vnvashist/Projects/blob/master/README.md#trading-bot-sp)
 
 # LSTM with Stock Forecasting
