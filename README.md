@@ -14,4 +14,4 @@ Some Initialization Parameters:
  
 - Using these parameters, I created a bot using simple if-else statements in python to loop through historical data (backtesting). Once the bot validates that all the conditions have passed it will either conduct it's buy or sell signal.
 - Here's the data if the test is run starting from 2022-01-01 to current day (2024-12-06).
-- ! (https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True)
+- ![alt text](https://github.com/vnvashist/Projects/blob/master/S%26P%20Bot%202022.png?raw=True)
