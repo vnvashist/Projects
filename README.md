@@ -21,11 +21,11 @@ I had recently gotten into investing and naturally, like many of my peers, was i
   \
   For those less familiar with LSTMs or Neural Nets, I will explain each of the above layers and my reasons for implementing them: \
   \
-    LSTM (Long-Short-Term-Memory) - Good for time series, implements memory gates which control what to remember/forget (long term or short term memory aspect) \
+    - LSTM (Long-Short-Term-Memory) - Good for time series, implements memory gates which control what to remember/forget (long term or short term memory aspect) \
   \
-    Dropout - Prevents overfitting, disables some of the neurons so that the model does not overfit exactly to the historical data we are using \
+    - Dropout - Prevents overfitting, disables some of the neurons so that the model does not overfit exactly to the historical data we are using \
   \
-    Dense - Learning layer, connects to all available neurons from the previous layer, contains weights/biases. \
+    - Dense - Learning layer, connects to all available neurons from the previous layer, contains weights/biases. \
   \
   My justification for using these layers is primarily to consider the time series aspect of the data while preventing overfitting. I start off with an LSTM layer to 'set the tone' and then continue with dropout layers to prevent any overfitting that may occur (20% dropout). Finally, I add a dense layer at the end to sucessfully predict the next closing price that AAPL will have (based on previous time series data). \
   \
