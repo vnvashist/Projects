@@ -37,7 +37,7 @@ I had recently gotten into investing and naturally, like many of my peers, was i
   \
   Also interestingly, while the forecasting for the model suggests a downward curve, the model also predicts the value of the stock to increase for the next 100 days. \
   \
-<ins> Points of Imporvement </ins>
+<ins> Points of Improvement </ins>
 \
 \
   Fundamentally, I knew that this project was not going to be perfect. If I could accurately predict stocks using yfinance data and a laptop the U.S market would not survive a single day. However, despite that I do have a few points of improvement that I think, for future iterations, could be beneficial. 
