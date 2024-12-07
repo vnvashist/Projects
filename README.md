@@ -26,7 +26,7 @@ Finally, I plotted a few different values but found speed vs attack to be a rela
 Here's the plot:
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Speed%20vs%20Attack.png?raw=True)
 \
-  From here I was curious to see the relationship between each type and their attack-speed ratio. I calculated each of the slopes of the lines of best fit and averaged them resulting in a value of 0.3226 as the ratio between Speed and Attack for all Pokemon types. This would be useful soon. \
+  From here I was curious to see the relationship between each type and their attack-speed ratio. I calculated each of the slopes of the lines of best fit and averaged them resulting in a value of 0.3226 as the ratio between Speed and Attack for all Pokemon types. This would be useful soon. 
 
 <ins> Modeling </ins> \
 \
