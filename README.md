@@ -26,8 +26,8 @@ Finally, I plotted a few different values but found speed vs attack to be a rela
 Here's the plot:
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Speed%20vs%20Attack.png?raw=True)
 \
-  From here I was curious to see the relationship between each type and their attack-speed ratio. I calculated each of the slopes of the lines of best fit and averaged them resulting in a value of 0.3226 as the ratio between Speed and Attack for all Pokemon types. This would be useful soon.
-\
+  From here I was curious to see the relationship between each type and their attack-speed ratio. I calculated each of the slopes of the lines of best fit and averaged them resulting in a value of 0.3226 as the ratio between Speed and Attack for all Pokemon types. This would be useful soon. \
+
 <ins> Modeling </ins> \
 \
   For the sake of simplicity I'm not going to go through every line of code here but I am going to do my best to mention some of the highlights in the code. Overall, I decided that I wanted to generate 2 names and stats, while keeping in mind that 0.3226 ratio I mentioned earlier. Like any GAN you have to build your generators and discriminators. Here I used the LeakyReLU activation function (normal ReLU causes dying neurons) and layerd them with Dense layers.
