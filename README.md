@@ -7,7 +7,7 @@
 
 # Pokemon Generator 
 \
-Another topic that I became very interested in during my deep learning course was GANs (generative adversial networks). They work in an antagonistic relationship between two neural networks: Generator and Discriminator. I became interseted in generating my own content, especially as generative AI has taken such a main focus on the world today. I thought that it would be interesting to see how a GAN would perform on generating fake pokemon given their names and their stats.
+Another topic that I became very interested in during my deep learning course was GANs (generative adversial networks). They work in an antagonistic relationship between two neural networks: Generator and Discriminator. I became interested in generating my own content, especially as generative AI has taken such a main focus on the world today. I thought that it would be interesting to see how a GAN would perform on generating fake pokemon given their names and their stats.
 \
 My focus for this project was 3-fold
 1. Data engineer a pipeline to draw in pokemon data
@@ -16,7 +16,7 @@ My focus for this project was 3-fold
 
 <ins> Data Engineering/Analysis </ins> \
 \
-  The API call portion of this project was relatively simple. I limited my call to take in 1025 entries (as there are only 1025 pokemon) and filtered out the dataset to only the relevant fields that I was interested in (name, type, attack, speed, defense, etc). \
+  The API call portion of this project was relatively simple. I limited my call to take in 1025 entries (as there are only 1025 pokemon) and filtered out the dataset to only the relevant fields that I was interested in (name, type, attack, speed, defense, etc).
   \
   From there I did a fair bit of data cleaning/transformation.
   1. I wanted to normalize the types into separate columns. Each pokemon has 1 main type and then two other 'subtypes'. Instead of having to decipher them all at once, I split them up to have their own columns
@@ -32,14 +32,14 @@ Here's the plot:
 
 <ins> Modeling </ins> \
 \
-  For the sake of simplicity I'm not going to go through every line of code here but I am going to do my best to mention some of the highlights in the code. Overall, I decided that I wanted to generate 2 names and stats, while keeping in mind that 0.3226 ratio I mentioned earlier. Like any GAN you have to build your generators and discriminators. Here I used the LeakyReLU activation function (normal ReLU causes dying neurons) and layerd them with Dense layers.
+  For the sake of simplicity I'm not going to go through every line of code here but I am going to do my best to mention some of the highlights in the code. Overall, I decided that I wanted to generate names and stats, while keeping in mind that 0.3226 ratio I mentioned earlier. Like any GAN you have to build your generators and discriminators. Here I used the LeakyReLU activation function (normal ReLU causes dying neurons) and layered them with Dense layers.
 \
-  Here's where the cool part comes in. At this stage I had to train my GAN while incorporating the relationship between attack and speed. I had never done this before and thought about where I would introduce this. I started of with writing my GAN as I normally would. I looped through epochs and created real and fake labels, predictions, etc. As I was writing my loss function implementation I then realized that this could be the point of influence that the relationship could have. A quick stackoverflow search also confirmed my suspicions. I decided to write the loss function while creating a variable called relationship_penalty. This variable would take in the generated attack data and use it to create a speed prediction (using the 0.3266 slope value). We would then subtract the speed prediction value from the GAN generated speed value to determine how different the value is. Using this variable we can multiply it to the lambda regularization parameter to easily tailor how much we want the relationshp penalty to affect the overal GAN stats. If this is confusing take a look at lines 76-83 and it might be a bit clearer. \
+  Here's where the cool part comes in. At this stage I had to train my GAN while incorporating the relationship between attack and speed. I had never done this before and thought about where I would introduce this. I started off with writing my GAN as I normally would. I looped through epochs and created real and fake labels, predictions, etc. As I was writing my loss function I then realized that this could be the point of influence that the relationship could have. A quick stackoverflow search also confirmed my suspicions. I decided to write the loss function while creating a variable called relationship_penalty. This variable would take in the generated attack data and use it to create a speed prediction (using the 0.3266 slope value). We would then subtract the speed prediction value from the GAN generated speed value to determine how different the value is. Using this variable we can multiply it to the lambda regularization parameter to easily tailor how much we want the relationshp penalty to affect the overal GAN stats. If this is confusing take a look at lines 76-83 and it might be a bit clearer. \
 \
 Ok so the final output? \
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Generator.png?raw=True)
 \
-Ok so not amazing, but not bad either. The stats when analyzed demonstrate an average of 0.26 ratio of attack to speed values. This is pretty close to the measured average of 0.3226. I think with a large generation batch we might see that number get closer to the average. The names are somewhat mangled together, most of them having parts that sound familiar. Overall the names do not sound cohesive enough to be considerd a success, but I will discuss that in my points of improvment.
+Ok so not amazing, but not bad either. The stats when analyzed demonstrate an average of 0.26 ratio of attack to speed values. This is pretty close to the measured average of 0.3226. I think with a larger generation batch we might see that number get closer to the average. The names are somewhat mangled together, most of them having parts that sound familiar. Overall the names do not sound cohesive enough to be considerd a success, but I will discuss that in my points of improvment.
 
 <ins> Points of Improvement </ins> \
 \
