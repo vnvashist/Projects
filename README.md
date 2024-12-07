@@ -17,7 +17,7 @@ My focus for this project was 3-fold
 \
   The API call portion of this project was relatively simple. I limited my call to take in 1025 entries (as there are only 1025 pokemon) and filtered out the dataset to only the relevant fields that I was interested in (name, type, attack, speed, defense, etc). \
   \
-  From there I did a fair bit of data cleaning/transformation. \
+  From there I did a fair bit of data cleaning/transformation.
   1. I wanted to normalize the types into separate columns. Each pokemon has 1 main type and then two other 'subtypes'. Instead of having to decipher them all at once, I split them up to have their own columns
   2. I also had to normalize the abilities into separate columns. I did not end up using this but figured it could be useful for future applications (maybe generating abilities)
   3. I expanded the stats into separate columns. Again, the api retreived the pokemon's stats into one single column. I prefered to keep them separate for sanity.
