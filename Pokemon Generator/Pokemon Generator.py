@@ -43,7 +43,7 @@ def build_discriminator(data_dim):
 
 
 # Train GAN with Relationship
-def train_gan_with_relationship(generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32, m=0.5, b=20, lambda_reg=10):
+def train_gan_with_relationship(generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32, m=0.3266, b=20, lambda_reg=10):
     generator_optimizer = Adam(0.0002, 0.5)
     discriminator_optimizer = Adam(0.0002, 0.5)
     loss_fn = tf.keras.losses.BinaryCrossentropy()
