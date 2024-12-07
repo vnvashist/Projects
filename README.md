@@ -37,7 +37,7 @@ Ok so the final output?
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Generator.png?raw=True)
 \
 Ok so not amazing, but not bad either. The stats when analyzed demonstrate an average of 0.26 ratio of attack to speed values. This is pretty close to the measured average of 0.3226. I think with a large generation batch we might see that number get closer to the average. The names are somewhat mangled together, most of them having parts that sound familiar. Overall the names do not sound cohesive enough to be considerd a success, but I will discuss that in my points of improvment. \
-\ 
+
 <ins> Points of Improvement </ins> \
 \
 So, like always, there are always points of improvement. Chiefly, among all other reasons, is the lack of data. It's funny because when you think of pokemon you think of an endless number of creatures, but, in reality, there are only 1025. That means this GAN only had 1025 names to train itself on. Given that limitation I am moderately impressed with what it has outputted. In the future shifting this model to focus on (assuming we're still dealing with Pokemon) image data may be a useful consideration. Afterall there are an outstanding number of pictures of all 1025 Pokemon out on the internet.
