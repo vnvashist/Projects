@@ -8,7 +8,6 @@
 Another topic that I became very interested in during my deep learning course was GANs (generative adversial networks). They work in an antagonistic relationship between two neural networks: Generator and Discriminator. I became interseted in generating my own content, especially as generative AI has taken such a main focus on the world today. I thought that it would be interesting to see how a GAN would perform on generating fake pokemon given their names and their stats.
 \
 My focus for this project was 3-fold
-\
 1. Data engineer a pipeline to draw in pokemon data
 2. Analyze the data to determine a relationship that I can leverage within the GAN
 3. Implement the GAN to create names, stats (while being discouraged to avoid the relationship determined in Step 2)
