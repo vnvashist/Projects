@@ -21,8 +21,8 @@ My focus for this project was 3-fold
   2. I also had to normalize the abilities into separate columns. I did not end up using this but figured it could be useful for future applications (maybe generating abilities)
   3. I expanded the stats into separate columns. Again, the api retreived the pokemon's stats into one single column. I prefered to keep them separate for sanity.
   4. Lastly, I used a MinMaxScaler() to ensure that all of the data points fall within a similar scale (important for GANs and even LSTMs) \
-  Finally, I plotted a few different values but found speed vs attack to be a relationship that made the most sense to enforce onto the GAN.
-\
+  Finally, I plotted a few different values but found speed vs attack to be a relationship that made the most sense to enforce onto the GAN. \
+
 Here's the plot:
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Speed%20vs%20Attack.png?raw=True)
 \
