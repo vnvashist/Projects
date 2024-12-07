@@ -1,4 +1,6 @@
 # Projects
+[Pokemon Generator](#pokemon-generator)
+\
 [LSTM with Stock Forecasting](#lstm-with-stock-forecasting)
 \
 [Trading Bot S&P](#trading-bot-sp)
