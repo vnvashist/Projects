@@ -22,7 +22,7 @@ My focus for this project was 3-fold
   1. I wanted to normalize the types into separate columns. Each pokemon has 1 main type and then two other 'subtypes'. Instead of having to decipher them all at once, I split them up to have their own columns
   2. I also had to normalize the abilities into separate columns. I did not end up using this but figured it could be useful for future applications (maybe generating abilities)
   3. I expanded the stats into separate columns. Again, the api retreived the pokemon's stats into one single column. I prefered to keep them separate for sanity.
-  4. Lastly, I used a MinMaxScaler() to ensure that all of the data points fall within a similar scale (important for GANs and even LSTMs) \
+  4. Lastly, I used a MinMaxScaler() to ensure that all of the data points fall within a similar scale (important for GANs and even LSTMs)
 
 Finally, I plotted a few different values but found speed vs attack to be a relationship that made the most sense to enforce onto the GAN.
 Here's the plot:
@@ -91,7 +91,6 @@ I had recently gotten into investing and naturally, like many of my peers, was i
 <ins> Final Thoughts </ins> \
 \
   Overall, I conducted this project as I was enrolled in Deep Learning. A lot of the tweaks and commits I made were as I was learning better practices for not only neural nets but LSTMs and how best to optimize their hyperparameters. Of course, there's still a lot to learn in that regard and I am keen on returning to this project to implement some more data sources and/or tweaking my model ever so slightly. 
-  \
 
 # Trading Bot S&P 
 \
