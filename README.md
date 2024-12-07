@@ -14,6 +14,7 @@ My focus for this project was 3-fold
 3. Implement the GAN to create names, stats (while being discouraged to avoid the relationship determined in Step 2)
 
 <ins> Data Engineering/Analysis </ins> \
+\
   The API call portion of this project was relatively simple. I limited my call to take in 1025 entries (as there are only 1025 pokemon) and filtered out the dataset to only the relevant fields that I was interested in (name, type, attack, speed, defense, etc). \
   \
   From there I did a fair bit of data cleaning/transformation. \
