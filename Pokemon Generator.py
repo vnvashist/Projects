@@ -2,47 +2,48 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LeakyReLU, Embedding, LSTM
+from tensorflow.keras.layers import Dense, LeakyReLU, Embedding, LSTM, Input
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.preprocessing.text import Tokenizer
 import random
 
-# Ensure clean TensorFlow session
+# Clean TensorFlow session
 tf.keras.backend.clear_session()
 
 
-# Prepare numeric data
+# Numeric Data for GAN
 def prepare_gan_data(pokemon_data, numeric_cols):
     return pokemon_data[numeric_cols].values
 
 
-# Build GAN generator
+# GAN Models
 def build_generator(latent_dim, data_dim):
     model = Sequential([
-        Dense(128, input_dim=latent_dim),
-        LeakyReLU(alpha=0.2),
+        Input(shape=(latent_dim,)),
+        Dense(128),
+        LeakyReLU(negative_slope=0.2),
         Dense(256),
-        LeakyReLU(alpha=0.2),
+        LeakyReLU(negative_slope=0.2),
         Dense(data_dim, activation='linear')
     ])
     return model
 
 
-# Build GAN discriminator
 def build_discriminator(data_dim):
     model = Sequential([
-        Dense(256, input_dim=data_dim),
-        LeakyReLU(alpha=0.2),
+        Input(shape=(data_dim,)),
+        Dense(256),
+        LeakyReLU(negative_slope=0.2),
         Dense(128),
-        LeakyReLU(alpha=0.2),
+        LeakyReLU(negative_slope=0.2),
         Dense(1, activation='sigmoid')
     ])
     return model
 
 
-# GAN training
-def train_gan(generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32):
+# Train GAN with Relationship
+def train_gan_with_relationship(generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32, m=0.5, b=20, lambda_reg=10):
     generator_optimizer = Adam(0.0002, 0.5)
     discriminator_optimizer = Adam(0.0002, 0.5)
     loss_fn = tf.keras.losses.BinaryCrossentropy()
@@ -71,16 +72,24 @@ def train_gan(generator, discriminator, gan_data, latent_dim, epochs=1000, batch
             noise = tf.random.normal((batch_size, latent_dim))
             generated_data = generator(noise)
             predictions = discriminator(generated_data)
-            g_loss = loss_fn(real_labels, predictions)
+
+            # Regularization for speed-attack relationship
+            attack = generated_data[:, numeric_cols.index("attack")]
+            speed = generated_data[:, numeric_cols.index("speed")]
+            speed_pred = m * attack + b
+            relationship_penalty = tf.reduce_mean(tf.square(speed - speed_pred))
+
+            # Generator loss
+            g_loss = loss_fn(real_labels, predictions) + lambda_reg * relationship_penalty
         grads = tape.gradient(g_loss, generator.trainable_variables)
         generator_optimizer.apply_gradients(zip(grads, generator.trainable_variables))
 
-        # Log
+        # Log progress
         if epoch % 100 == 0:
-            print(f"Epoch {epoch}: D loss = {d_loss.numpy()}, G loss = {g_loss.numpy()}")
+            print(f"Epoch {epoch}: D loss = {d_loss.numpy()}, G loss = {g_loss.numpy()}, Penalty = {relationship_penalty.numpy()}")
 
 
-# Prepare name data
+# Prepare Name Data
 def prepare_name_data(pokemon_names):
     tokenizer = Tokenizer(char_level=True, lower=True)
     tokenizer.fit_on_texts(pokemon_names)
@@ -99,7 +108,7 @@ def prepare_name_data(pokemon_names):
     return X_name, y_name, tokenizer, len(tokenizer.word_index) + 1, max_seq_length
 
 
-# Build name generator
+# Name Generator Model
 def build_name_generator(vocab_size, max_seq_length):
     model = Sequential([
         Embedding(vocab_size, 50, input_length=max_seq_length - 1),
@@ -110,7 +119,7 @@ def build_name_generator(vocab_size, max_seq_length):
     return model
 
 
-# Generate names
+# Generate Names with Randomness
 def generate_name_with_randomness(model, tokenizer, max_length, start_char='a', temperature=1.0):
     tokenized_start = tokenizer.texts_to_sequences([start_char])[0]
     name = tokenized_start
@@ -126,7 +135,7 @@ def generate_name_with_randomness(model, tokenizer, max_length, start_char='a', 
     return ''.join(tokenizer.sequences_to_texts([name])[0])
 
 
-# Pokémon Generator
+# Combine Stats and Names
 def generate_pokemon(generator, name_generator, tokenizer, numeric_cols, latent_dim, num_samples=10):
     noise = tf.random.normal((num_samples, latent_dim))
     generated_stats = generator(noise).numpy()
@@ -141,7 +150,7 @@ def generate_pokemon(generator, name_generator, tokenizer, numeric_cols, latent_
     return generated_pokemon_df
 
 
-# Main Execution
+# Main
 if __name__ == "__main__":
     # Load data
     pokemon_data = pd.read_csv('pokemon_data.csv')
@@ -160,9 +169,12 @@ if __name__ == "__main__":
     # Build GAN
     generator = build_generator(latent_dim, len(numeric_cols))
     discriminator = build_discriminator(len(numeric_cols))
-    train_gan(generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32)
+    train_gan_with_relationship(
+        generator, discriminator, gan_data, latent_dim, epochs=1000, batch_size=32, m=0.5, b=20, lambda_reg=10
+    )
 
     # Generate Pokémon
     generated_pokemon = generate_pokemon(generator, name_generator, tokenizer, numeric_cols, latent_dim, num_samples=10)
+    pd.set_option('display.max_columns', None)
     print("Generated Pokémon with Stats and Names:")
     print(generated_pokemon)
