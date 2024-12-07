@@ -34,8 +34,7 @@ Here's the plot:
 \
   Here's where the cool part comes in. At this stage I had to train my GAN while incorporating the relationship between attack and speed. I had never done this before and thought about where I would introduce this. I started of with writing my GAN as I normally would. I looped through epochs and created real and fake labels, predictions, etc. As I was writing my loss function implementation I then realized that this could be the point of influence that the relationship could have. A quick stackoverflow search also confirmed my suspicions. I decided to write the loss function while creating a variable called relationship_penalty. This variable would take in the generated attack data and use it to create a speed prediction (using the 0.3266 slope value). We would then subtract the speed prediction value from the GAN generated speed value to determine how different the value is. Using this variable we can multiply it to the lambda regularization parameter to easily tailor how much we want the relationshp penalty to affect the overal GAN stats. If this is confusing take a look at lines 76-83 and it might be a bit clearer. \
 \
-Ok so the final output?
-\
+Ok so the final output? \
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Pokemon%20Generator/Pokemon%20Generator.png?raw=True)
 \
 Ok so not amazing, but not bad either. The stats when analyzed demonstrate an average of 0.26 ratio of attack to speed values. This is pretty close to the measured average of 0.3226. I think with a large generation batch we might see that number get closer to the average. The names are somewhat mangled together, most of them having parts that sound familiar. Overall the names do not sound cohesive enough to be considerd a success, but I will discuss that in my points of improvment. \
