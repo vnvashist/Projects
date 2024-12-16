@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 class ResourceManagementEnv(gym.Env):
     def __init__(self, render_mode = None):
         super(ResourceManagementEnv, self).__init__()
-        self.action_space = spaces.Discrete(6)
+        self.action_space = spaces.Discrete(7) # for the number of actions (0-6)
         self.observation_space = spaces.Box(
             low=0, high=np.inf, shape=(8,), dtype=np.float32
         )
@@ -32,6 +32,7 @@ class ResourceManagementEnv(gym.Env):
         self.houses = 1
         self.soldiers = 0
         self.population = 5
+        self.max_population = self.houses * 5 # Each house allows you to have 5 more population
         self.turn = 0
         self.max_turns = 1000 #APM (around 50) * (avg game time (20 mins))
 
@@ -83,13 +84,30 @@ class ResourceManagementEnv(gym.Env):
                 reward += 5
             else:
                 reward -= 5
+        elif action == 6:
+            if self.population < self.max_population:
+                if self.food >=20:
+                    self.food -= 20
+                    self.population += 1
+                    reward += 20
+                else:
+                    reward -= 5
+            else:
+                reward -= 5
+
 
         # Simulates an attack every 10 actions
-        if self.turn %10 == 0 and self.turn != 0:
+        if self.turn %10 == 0 and self.turn >= 500:
+            if self.soldiers >= 10:
+                reward += 20
+            else:
+                self.population -=5
+                reward -= 40
+        elif self.turn %10 == 0 and self.turn != 0:
             if self.soldiers >= 2:
                 reward += 20
             else:
-                self.population -=1
+                self.population -=2
                 reward -=20
 
         # Simulates demand for villager costs and also general importance of having food
@@ -129,7 +147,12 @@ env = Monitor(env, log_dir)
 
 env = DummyVecEnv([lambda: env])
 
-model = PPO('MlpPolicy', env, verbose=1)
+model = PPO('MlpPolicy', env, verbose=1,
+            learning_rate = 0.0003,
+            gamma = 0.99,
+            n_steps = 2048,
+            batch_size = 64,
+            ent_coef = 0.01)
 
 model.learn(total_timesteps=100000)
 
@@ -137,7 +160,7 @@ model.save("ppo_resouce_management")
 
 obs = env.reset()
 print("reset output:" +  str(obs))
-for i in range(50):
+for i in range(1000):
     action, _states = model.predict(obs)  # Predict an action
     obs, reward, terminated, truncated = env.step(action)  # Step through the environment
 
