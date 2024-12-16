@@ -60,6 +60,7 @@ Here's how the agent performed (after a lot of tinkering):
 \
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20with%20AOE2.png?raw=True)
 \
+\
 <ins> Points of Improvement </ins>
 \
 So the agent performed really well given the restrictions we placed on it. It maximized the population values, while keeping the soldier counts high, all the while getting a lot of resources under our belt to help with future expansions if our empire so wishes to.
