@@ -22,10 +22,10 @@ AOE2 is one of the greatest strategy games ever created where you, as a civiliza
 3. Gold - Necessary to train military units
 4. Stone - Necessary for Castles (not implemented, i'll get into that in a bit)
 5. Houses - Necessary to increase max_population size 
-\
+
 
 Given these resources, I tasked my agent to determine what the optimal set of moves are to maximize both resources and survivability. I used a reward system where positive actions like increasing the population or military unit count gave the agent points and negative actions whenver the agent would attempt to do something that there are not enough resources for. Here is a list of some of the other actions that can give rewards:
-\
+
 1. If the military unit count was greater than or equal to the (population_count/4) - Given a growing population we need a growing army to protect them (line 122-133)
 2. If the population count is lower than the max_population size (line 99)
 3. Building a house and also rewarding the agent extra if the house is built right before the population count hits the max_population count. (line 75-88)
