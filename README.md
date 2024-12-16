@@ -37,7 +37,7 @@ Fundamentally the agent will iterate through actions that dictate either resourc
 Training an agent to perform these actions was fairly easy using OpenAI's gymnasium package. Using it, you can create a training environment that is customized to your needs. In this case I created my own environement (rather than using a pre-built one) and initialized various factors like discrete spaces (7 as there are 0-6 actions) or the observation space (what the agent 'sees' to help make it's decisions).
 \
 From there it was a matter of setting my starting class variables and the appropriate rewards for each 'step' that the agent makes. The foundational code here was:
-\
+
 ```python
 if action == 0: #(any number 0-6, gather wood in this case)
   reward += 1
