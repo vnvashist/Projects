@@ -38,9 +38,9 @@ Training an agent to perform these actions was fairly easy using OpenAI's gymnas
 \
 From there it was a matter of setting my starting class variables and the appropriate rewards for each 'step' that the agent makes. The foundational code here was:
 \
-if action == 0: (any number 0-6, gather wood in this case)
+'if action == 0:' (any number 0-6, gather wood in this case)
 \
-  reward += 1
+  'reward += 1'
 \
 The same format is applied to all 7 of the available actions with select modifications. For example, as mentioned before, rewarding the system more if it min/maxes the population-max_population ratio was important as we were only spending turns to gather resources when absolutely necessary. Likewise, it was important to incentivize a high military unit count as it would protect our citizens in the long run. Accordingly, due to how important these actions were, they had bonus reward and penalty systems to bring nuance to the agent.
 \
@@ -50,14 +50,14 @@ Here's how the agent performed (after a lot of tinkering):
 \
 <ins> Points of Improvement </ins>
 \
-So fundamentally the agent performed really well given the restrictions we placed on it. It maximized the population values, while keeping the soldier counts high, all the while getting a lot of resources under our belt to help with future expansions if our empire so wishes to. Another incredible observation is that, for the first 15 turns, the agent performed what is known as an 'ideal' start, a strategy that most pro-players perform to this day. It's where you create 3 villagers and put some on food gather. Then you build a house, and afterwards create more villagers and put them on wood gathering.
+So the agent performed really well given the restrictions we placed on it. It maximized the population values, while keeping the soldier counts high, all the while getting a lot of resources under our belt to help with future expansions if our empire so wishes to. Another incredible observation is that, for the first 15 turns, the agent performed what is known as an 'ideal' start, a strategy that most pro-players perform to this day. It's where you create 3 villagers and put some on food gather. Then you build a house, and afterwards create more villagers and put them on wood gathering.
 \
 Here's the picture for the first couple of turns:
 \
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20AOE2%20start.png?raw=True)
 \
 Of course, if you were to compare the final resource values to most professional games at the 20 min mark, it would be very different from how AOE2 is played. Resources are generally not hoarded for a rainy day, but rather to maximize your army, buildings, or villager count. That is, there is no incentive to holding on to your resources. The objective is to spend your resources to defeat your enemy. In the future, I'd like to instill that ideology into the agent to ensure that, while they are keeping with good soldier-population practices, they could be maximizing their values better. Implementing a reward to hitting a certain number of soldiers at certain turn numbers could be a good way to do that. Overall though, I am pretty happy with how this turned out. The actions that the agent makes are generally what you would do when you are trying to build your economy in the game. Eventually, by adding military actions and reward/penalty systems, I think we could have a fully functioning agent to play against other players.
-\
+
 # Pokemon Generator 
 \
 Another topic that I became very interested in during my deep learning course was GANs (generative adversial networks). They work in an antagonistic relationship between two neural networks: Generator and Discriminator. I became interested in generating my own content, especially as generative AI has taken such a main focus on the world today. I thought that it would be interesting to see how a GAN would perform on generating fake pokemon given their names and their stats.
