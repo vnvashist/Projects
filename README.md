@@ -1,10 +1,60 @@
 # Projects
+[Reinforcement Learning in Age of Empires 2] [#reinforcement-learning-in-age-of-empires-2]
+\
 [Pokemon Generator](#pokemon-generator)
 \
 [LSTM with Stock Forecasting](#lstm-with-stock-forecasting)
 \
-[Trading Bot S&P](#trading-bot-sp)
+[Trading bot S&P](#trading-bot-sp)
 
+# Reinforcement Learning in Age of Empires 2
+\
+Keeping in theme with video games, I recently completed a course in reinforcement learning and became interested to see the level of complexity I could factor into OpenAI's Gym package. The examples we covered in class were fairly binary problems that ranged from simple grid walks to stochastic differential equations that helped us park more efficiently.
+\
+Accordingly, I wanted to see if one of my favorite games of all time AOE 2 could be deciphered through using RL (reinforcement learning). If you aren't familiar with AOE2, I'll go over a brief description to lend a bit of context to this project.
+\
+<ins> Background </ins>
+\
+AOE2 is one of the greatest strategy games ever created where you, as a civilizations king/lord/commander, are responsible for deciding how your group of villagers/military units band together to form an empire to defeat at least one other player who is tasked with the same objective. Of course, any great conquest requires resources and there are four that are useful for you.
+1. Food - Necessary to train both military units and villagers
+2. Wood - Necessary to build houses which increase your population capacity
+3. Gold - Necessary to train military units
+4. Stone - Necessary for Castles (not implemented, i'll get into that in a bit)
+5. Houses - Necessary to increase max_population size
+\
+Given these resources, I tasked my agent to determine what the optimal set of moves are to maximize both resources and survivability. I used a reward system where positive actions like increasing the population or military unit count gave the agent points and negative actions whenver the agent would attempt to do something that there are not enough resources for. Here is a list of some of the other actions that can give rewards:
+\
+1. If the military unit count was greater than or equal to the (population_count/4) - Given a growing population we need a growing army to protect them (line 122-133)
+2. If the population count is lower than the max_population size (line 99)
+3. Building a house and also rewarding the agent extra if the house is built right before the population count hits the max_population count. (line 75-88)
+\
+Fundamentally the agent will iterate through actions that dictate either resource gathering, building houses, or creating villagers/soldiers. 
+\
+<ins> Modeling </ins>
+\
+Training an agent to perform these actions was fairly easy using OpenAI's gymnasium package. Using it, you can create a training environment that is customized to your needs. In this case I created my own environement (rather than using a pre-built one) and initialized various factors like discrete spaces (7 as there are 0-6 actions) or the observation space (what the agent 'sees' to help make it's decisions).
+\
+From there it was a matter of setting my starting class variables and the appropriate rewards for each 'step' that the agent makes. The foundational code here was:
+\
+if action == 0: (any number 0-6, gather wood in this case)
+\
+  reward += 1
+\
+The same format is applied to all 7 of the available actions with select modifications. For example, as mentioned before, rewarding the system more if it min/maxes the population-max_population ratio was important as we were only spending turns to gather resources when absolutely necessary. Likewise, it was important to incentivize a high military unit count as it would protect our citizens in the long run. Accordingly, due to how important these actions were, they had bonus reward and penalty systems to bring nuance to the agent.
+\
+Here's how the agent performed (after a lot of tinkering):
+\
+[alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20with%20AOE2.png?raw=True)
+\
+<ins> Points of Improvement </ins>
+So fundamentally the agent performed really well given the restrictions we placed on it. It maximized the population values, while keeping the soldier counts high, all the while getting a lot of resources under our belt to help with future expansions if our empire so wishes to. Another incredible observation is that, for the first 15 turns, the agent performed what is known as an 'ideal' start, a strategy that most pro-players perform to this day. It's where you create 3 villagers and put some on food gather. Then you build a house, and afterwards create more villagers and put them on wood gathering.
+\
+Here's the picture for the first couple of turns:
+\
+[alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20AOE2%20start.png?raw=True)
+\
+Of course, if you were to compare the final resource values to most professional games at the 20 min mark, it would be very different from how AOE2 is played. Resources are generally not hoarded for a rainy day, but rather to maximize your army, buildings, or villager count. That is, there is no incentive to holding on to your resources. The objective is to spend your resources to defeat your enemy. In the future, I'd like to instill that ideology into the agent to ensure that, while they are keeping with good soldier-population practices, they could be maximizing their values better. Implementing a reward to hitting a certain number of soldiers at certain turn numbers could be a good way to do that. Overall though, I am pretty happy with how this turned out. The actions that the agent makes are generally what you would do when you are trying to build your economy in the game. Eventually, by adding military actions and reward/penalty systems, I think we could have a fully functioning agent to play against other players.
+\
 # Pokemon Generator 
 \
 Another topic that I became very interested in during my deep learning course was GANs (generative adversial networks). They work in an antagonistic relationship between two neural networks: Generator and Discriminator. I became interested in generating my own content, especially as generative AI has taken such a main focus on the world today. I thought that it would be interesting to see how a GAN would perform on generating fake pokemon given their names and their stats.
@@ -92,7 +142,7 @@ I had recently gotten into investing and naturally, like many of my peers, was i
 \
   Overall, I conducted this project as I was enrolled in Deep Learning. A lot of the tweaks and commits I made were as I was learning better practices for not only neural nets but LSTMs and how best to optimize their hyperparameters. Of course, there's still a lot to learn in that regard and I am keen on returning to this project to implement some more data sources and/or tweaking my model ever so slightly. 
 
-# Trading Bot S&P 
+# Trading bot S&P 
 \
 I was interested in creating an algo trading bot that would automatically make trades for me on the strategy 'buy at the dip'. This bot used simple python if-else statements but used various finance metrics like moving averages and rsi to make decisions on when to buy and sell.
 
