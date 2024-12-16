@@ -69,6 +69,7 @@ Another incredible observation is that, for the first 15 turns, the agent perfor
 \
 Here's the picture for the first couple of turns:
 \
+\
 ![alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20AOE2%20start.png?raw=True)
 \
 Of course, if you were to compare the final resource values to most professional games at the 20 min mark, it would be very different from how AOE2 is played. Resources are generally not hoarded for a rainy day, but rather to maximize your army, buildings, or villager count. That is, there is no incentive to holding on to your resources. The objective is to spend your resources to defeat your enemy. In the future, I'd like to instill that ideology into the agent to ensure that, while they are keeping with good soldier-population practices, they could be maximizing their values better. Implementing a reward to hitting a certain number of soldiers at certain turn numbers could be a good way to do that. Overall though, I am pretty happy with how this turned out. The actions that the agent makes are generally what you would do when you are trying to build your economy in the game. Eventually, by adding military actions and reward/penalty systems, I think we could have a fully functioning agent to play against other players.
