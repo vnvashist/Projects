@@ -32,7 +32,6 @@ Given these resources, I tasked my agent to determine what the optimal set of mo
 
 Fundamentally the agent will iterate through actions that dictate either resource gathering, building houses, or creating villagers/soldiers. 
 
-\
 <ins> Modeling </ins>
 \
 Training an agent to perform these actions was fairly easy using OpenAI's gymnasium package. Using it, you can create a training environment that is customized to your needs. In this case I created my own environement (rather than using a pre-built one) and initialized various factors like discrete spaces (7 as there are 0-6 actions) or the observation space (what the agent 'sees' to help make it's decisions).
