@@ -1,5 +1,5 @@
 # Projects
-[Reinforcement Learning in Age of Empires 2] [#reinforcement-learning-in-age-of-empires-2]
+[Reinforcement Learning in Age of Empires 2](#reinforcement-learning-in-age-of-empires-2)
 \
 [Pokemon Generator](#pokemon-generator)
 \
@@ -12,6 +12,7 @@
 Keeping in theme with video games, I recently completed a course in reinforcement learning and became interested to see the level of complexity I could factor into OpenAI's Gym package. The examples we covered in class were fairly binary problems that ranged from simple grid walks to stochastic differential equations that helped us park more efficiently.
 \
 Accordingly, I wanted to see if one of my favorite games of all time AOE 2 could be deciphered through using RL (reinforcement learning). If you aren't familiar with AOE2, I'll go over a brief description to lend a bit of context to this project.
+\
 \
 <ins> Background </ins>
 \
@@ -44,14 +45,14 @@ The same format is applied to all 7 of the available actions with select modific
 \
 Here's how the agent performed (after a lot of tinkering):
 \
-[alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20with%20AOE2.png?raw=True)
+![alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20with%20AOE2.png?raw=True)
 \
 <ins> Points of Improvement </ins>
 So fundamentally the agent performed really well given the restrictions we placed on it. It maximized the population values, while keeping the soldier counts high, all the while getting a lot of resources under our belt to help with future expansions if our empire so wishes to. Another incredible observation is that, for the first 15 turns, the agent performed what is known as an 'ideal' start, a strategy that most pro-players perform to this day. It's where you create 3 villagers and put some on food gather. Then you build a house, and afterwards create more villagers and put them on wood gathering.
 \
 Here's the picture for the first couple of turns:
 \
-[alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20AOE2%20start.png?raw=True)
+![alt text](https://github.com/vnvashist/Projects/blob/master/Reinforcement%20Learning%20in%20AOE2/RL%20AOE2%20start.png?raw=True)
 \
 Of course, if you were to compare the final resource values to most professional games at the 20 min mark, it would be very different from how AOE2 is played. Resources are generally not hoarded for a rainy day, but rather to maximize your army, buildings, or villager count. That is, there is no incentive to holding on to your resources. The objective is to spend your resources to defeat your enemy. In the future, I'd like to instill that ideology into the agent to ensure that, while they are keeping with good soldier-population practices, they could be maximizing their values better. Implementing a reward to hitting a certain number of soldiers at certain turn numbers could be a good way to do that. Overall though, I am pretty happy with how this turned out. The actions that the agent makes are generally what you would do when you are trying to build your economy in the game. Eventually, by adding military actions and reward/penalty systems, I think we could have a fully functioning agent to play against other players.
 \
