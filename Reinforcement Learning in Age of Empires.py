@@ -58,19 +58,19 @@ class ResourceManagementEnv(gym.Env):
             reward += 1
 
         if action == 0: # Gather wood
-            self.wood += (self.population) * 10 # Each villager can gather 10, fourth of pop is to each resource
+            self.wood += (self.population // (10/3)) * 10 # Each villager can gather 10, 30% of pop to wood
             if self.population >= self.max_population -1: # Incentivize gathering wood when houses are needed
                 reward += 3
             else:
                 reward +=1
         elif action == 1: # Gather food
-            self.food += (self.population) * 10
+            self.food += (self.population // (10/3)) * 10 # 30% of villagers to food
             reward +=1
         elif action == 2: # Gather gold
-            self.gold += (self.population) * 10
+            self.gold += (self.population // (10/2)) * 10 # 20% of villagers to gold
             reward +=1
         elif action == 3: # Gather stone
-            self.stone += (self.population) * 10
+            self.stone += (self.population // (10/2)) * 10 # 20% of villagers to stone
             reward +=1
         elif action == 4: # Build house
             if self.wood >=50: # Need 50 wood to build house
@@ -131,13 +131,6 @@ class ResourceManagementEnv(gym.Env):
             else:
                 self.population -=2
                 reward -=20
-
-        # Simulates demand for villager costs and also general importance of having food
-        food_consumed = self.population * 1
-        self.food -= food_consumed
-        if self.food < 0:
-            self.food = 0
-            reward -= 10
 
         self.turn += 1
 
