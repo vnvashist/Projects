@@ -29,7 +29,7 @@ Given these resources, I tasked my agent to determine what the optimal set of mo
 1. If the military unit count was greater than or equal to the (population_count/4) - Given a growing population we need a growing army to protect them (line 122-133)
 2. If the population count is lower than the max_population size (line 99)
 3. Building a house and also rewarding the agent extra if the house is built right before the population count hits the max_population count. (line 75-88)
-\
+
 Fundamentally the agent will iterate through actions that dictate either resource gathering, building houses, or creating villagers/soldiers. 
 
 \
