@@ -43,7 +43,18 @@ if action == 0: #(any number 0-6, gather wood in this case)
   reward += 1
 ```
 \
-The same format is applied to all 7 of the available actions with select modifications. For example, as mentioned before, rewarding the system more if it min/maxes the population-max_population ratio was important as we were only spending turns to gather resources when absolutely necessary. Likewise, it was important to incentivize a high military unit count as it would protect our citizens in the long run. Accordingly, due to how important these actions were, they had bonus reward and penalty systems to bring nuance to the agent.
+The same format is applied to all 7 of the available actions with select modifications. For example, as mentioned before, rewarding the system more if it min/maxes the population-max_population ratio was important as we were only spending turns to gather resources when absolutely necessary. Likewise, it was important to incentivize a high military unit count as it would protect our citizens in the long run. Accordingly, due to how important these actions were, they had bonus reward and penalty systems to bring nuance to the agent. For example for the soldier training system here is the code:
+```python
+elif action == 5: # Train Soldiers
+    if self.food >=50 and self.gold >=20:
+        self.food -= 50
+        self.gold -= 20
+        self.soldiers += 1
+        reward += 5
+    else:
+        print(f"Failed to train soldier: Food: {self.food}, Gold: {self.gold}")
+        reward -= 5
+```
 \
 Here's how the agent performed (after a lot of tinkering):
 \
