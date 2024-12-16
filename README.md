@@ -40,9 +40,8 @@ From there it was a matter of setting my starting class variables and the approp
 \
 '''
 if action == 0: #(any number 0-6, gather wood in this case)
-\
   reward += 1
-  '''
+'''
 \
 The same format is applied to all 7 of the available actions with select modifications. For example, as mentioned before, rewarding the system more if it min/maxes the population-max_population ratio was important as we were only spending turns to gather resources when absolutely necessary. Likewise, it was important to incentivize a high military unit count as it would protect our citizens in the long run. Accordingly, due to how important these actions were, they had bonus reward and penalty systems to bring nuance to the agent.
 \
