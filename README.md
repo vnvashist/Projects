@@ -38,7 +38,7 @@ Training an agent to perform these actions was fairly easy using OpenAI's gymnas
 \
 From there it was a matter of setting my starting class variables and the appropriate rewards for each 'step' that the agent makes. The foundational code here was:
 \
-'''
+'''python
 if action == 0: #(any number 0-6, gather wood in this case)
   reward += 1
 '''
