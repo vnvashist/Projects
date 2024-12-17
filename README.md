@@ -57,7 +57,7 @@ Here the parameters are variables within the OU equation. If you look at this pi
 From here, it was a matter of generating the notes, scaling them to C Major and then outputting the midi file. It was very simple and the output was file:
 
 <video width="640" height="360" controls>
-  <source src="/SDE%20for%20Music%20Composition/music.mp4" type="video/mp4">
+  <source src="Projects/SDE%20for%20Music%20Composition/music.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
