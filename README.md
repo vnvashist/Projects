@@ -1,4 +1,6 @@
 # Projects
+[Stochastic Differential Equations for Music Composition](#stochastic-differential-equations-for-music-composition)
+\
 [Reinforcement Learning in Age of Empires 2](#reinforcement-learning-in-age-of-empires-2)
 \
 [Pokemon Generator](#pokemon-generator)
@@ -6,6 +8,77 @@
 [LSTM with Stock Forecasting](#lstm-with-stock-forecasting)
 \
 [Trading bot S&P](#trading-bot-sp)
+
+# Stochastic Differential Equations for Music Composition
+\
+Working in RL made me start to get interested in the generative side of it and to see how it performs in music. I've always been interested in music composition and found stochastic differential equations interesting because they may be able to simulate the randomness that most musicians claim generative processes cannot replicate. Afterall, training a computer statically on Bach's works may just output a soulless regurgitation of an Aria but with SDEs we can account for that little bit of crazy that each musician has in them. 
+\
+The code for this project was very simple as it was just implementing math. Understanding the math was a bit harder and I'll do my best to break it down for you. 
+\
+\
+<ins> Background </ins>
+\
+So, if you're not familiar with SDEs, they are a way to determine an output value while taking into account various factors like it's starting value, known drift, and a 'randomness factor' that could shift said value. They're kind of like linear regression but incorporate a standard distribution with respect to time.
+\
+For example, SDEs are generally used in stock prediction (ironic that I didn't know about them yet in my other projects :\\). The starting value would be the current value of the stock (let's say $10). The drift value would be the difference you would expect to see in it (lets say 10%). From here, we also have a randomness variable or volatility that we capture for each time step in the stock prediction. So for each day we would incorporate:
+\
+Starting Value: $10 \
+Drift: 10% \
+Volatility: 20% (very risky stock) \
+Time Step : 1/252 (1 day out of 252 trading days) \
+dWt (Randomly sampled noise from a standard distribution) : TBD \
+\
+For the sake of simplicity I'm not going to write out the math for this but plugging it into an SDE would output a stock value given all of these variables for a single day. 
+\
+Ok. So how does this factor into music composition? Simple. We're going to substitute the above values but using a specific equation called the Ornstein-Uhlenbeck (OU) equation. This equation has a special bonus property that focuses on returning to the mean. A simple analogy would be that it rubber bands values back to the mean and that rubber band intensity can be changed depending on how crazy you want to get. Again, I'm not going to get into the math for it here, but I encourage reading the Wikipedia on it, it has a lot of cool ideas. I will explain my code though and assume you have some understanding of SDEs at this point.
+\
+\
+<ins> Code Review </ins>
+\
+Alright, so at this point it came to writing my code and I started off with the intention of making something very simple. I used the python package midiutil to help load, scale, and save midi files that would be generated using the OU equation.
+\
+The code to generate the notes was as follows:
+```python
+def generate_ou_notes(n_steps, theta, mu, sigma, start_value):
+    dt = 1
+    notes = [start_value]
+
+    for _ in range(n_steps - 1):
+        dW = np.random.normal(0, np.sqrt(dt))
+        dX = theta * (notes[-1] - mu) * dt + sigma + dW
+        notes.append(notes[-1] + dX)
+
+    return np.array(notes)
+```
+Here the parameters are variables within the OU equation. If you look at this picture, you may be able to see that I am just translating the mathematically equation into python:
+\
+![alt text](https://github.com/vnvashist/Projects/blob/master/SDE%20for%20Music%20Composition/OU%20equation.png?raw=True)
+\
+From here, it was a matter of generating the notes, scaling them to C Major and then outputting the midi file. It was very simple and the output was file:
+
+https://github.com/user-attachments/assets/a19f7744-8857-43cc-be2b-b2c8b27021fb
+
+Ok, not bad but not very melodic. I realized that this was going to take a bit more work. I decided to solve my musicality issue, I would due a couple of changes. First and foremost was to implement a harmony. I could easily create two tracks using the midiutil package and could overlay them into one midi file. However, I realized pretty quickly that notes were playing on top of each other very often, and also the duration of notes were static. These two issues made the music sound very robotic. Accordingly, I implemented a duration array that could be taken in when the midiutil package was converting the generated notes into a midi file. Here's the code for that:
+
+```python
+durations = np.random.choice([0.5, 1], size=n_steps)
+```
+Pretty simple right? I figured that with eight and quarter notes, the music could have more rhythm and would be significantly more interesting to the ear. Here's the output for this run:
+
+https://github.com/user-attachments/assets/9532edaa-0218-457a-8352-2e2f99050e1a
+
+Not bad! There's a fair amount of musicality here despite being 'random nonsense' (not too different from my own compositions unfortunately). 
+\
+I decided to do one last implementation to see if I could make something more exciting. I made three changes to my code here. One was changing the BPM. I pushed the BPM up from 120 to 180 so that notes would play a bit faster. Two was changing the harmony's scale to C lydian. If you're not familiar with music theory, C lydian is very similar to C major but has a F# instead of an F. This adds for a bit of dissonance in the music, or simply put, 'makes it interesting'. Lastly, I shifted the n_steps parameter to 100 to get a longer song out of the process. Here's the final product:
+
+https://github.com/user-attachments/assets/e2543a51-6da1-47be-9846-f6b4534a3d9a
+
+<ins> Points of Improvement </ins>
+\
+Admitedly, I was very surprised how well this project turned out. Will this be replacing musicians any time soon? Absolutely.... not. This hardly sounds like music but I think it has all the elements of great inspiration. I think with enough iterations, or even tweaking, there could be some valuable phrases that could inspire some truly poignant music. Afterall, the slow iterative process of honing in on a melody is something that happens more often than you think in music composition. It's not that often that people just wake up with a melody in their head and create tomorrow's next hit (lucky few I suppose). Lastly, I wanted to share a final plot I made here that demonstrates the movement of the harmony and melody generations and how they move through the mapped melody notes. There's not a whole lot of insights to be gleaned here but I found that a visual representation might be easier to grasp if you are not as musically inclined. Here's the plot:
+\
+![alt text](https://github.com/vnvashist/Projects/blob/master/SDE%20for%20Music%20Composition/SDE%20for%20Music%20Composition%20C%20Lydian.png?raw=True)
+\
 
 # Reinforcement Learning in Age of Empires 2
 \
