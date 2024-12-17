@@ -56,7 +56,7 @@ Here the parameters are variables within the OU equation. If you look at this pi
 \
 From here, it was a matter of generating the notes, scaling them to C Major and then outputting the midi file. It was very simple and the output was file:
 
-[elephant](/music.mp4)
+[Initial Music Composition](/SDE for Music Composition/music.mp4)
 
 Ok, not bad but not very melodic. I realized that this was going to take a bit more work. I decided to solve my musicality issue, I would due a couple of changes. First and foremost was to implement a harmony. I could easily create two tracks using the midiutil package and could overlay them into one midi file. However, I realized pretty quickly that notes were playing on top of each other very often, and also the duration of notes were static. These two issues made the music sound very robotic. Accordingly, I implemented a duration array that could be taken in when the midiutil package was converting the generated notes into a midi file. Here's the code for that:
 
