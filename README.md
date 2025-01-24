@@ -15,15 +15,20 @@
 \
 Curiosity is a funny thing, and it's even funnier after a nice dinner and bottle of wine. Very recently, my friends and I went out to a nice dinner and ordered two bottles of wine. One was one the cheaper end, about $30 for the bottle, and the other was more expensive and sat at the $80 per bottle rate (we all ordered just a glass of each, we're poor students afterall). To our collective surprise, we liked the $30 bottle much better than the $80 one. Hmmm. Bias towards how cheap the bottle was while still tasting good? Possibly, but we didn't dislike the $80 one. We actually liked it too, but were just surprised at how well the $30 bottle performed. This eventually led us to a discussion on other bottles of wine we've all had in the past and got me to thinking... Can I predict a wine's price based on the country, region, winery, year, etc... Afterall, I wanted to see if there was an actual pattern that could be discovered regarding wine prices, or if they were priced less systematically and more up the whims of the sommelier at the restaurant that day. 
 \
+\
 The code for this project is documented in a jupyter notebook, but I'll go over some of the key features I implemented to get this model working well.
 \
+\
 First and foremost, the data was scraped from Vivino.com. They had an extensive list that I scraped over for the last two years, and got about 8000 records for.
+\
 \
 <ins> Background </ins>
 \
 Fundamentally, I knew off the bat that I wanted to use an XGBoost Regressor. I figured with the extensive hyperparameters, I could probably get a good enough model to work with the dataset I have. Furthermore, a regression model is easy and straightforward enough to implement, so I wouldn't have to worry about this small curiosity taking up too much of my compute units (should have saved my wine money for a better GPU).
 \
+\
 <ins> Code Review </ins>
+\
 The jupyter notebook should walk you through most my code, but I'm going to break down a few thing that I wanted to call special attention to. Of course, the first step in any data task is preprocessing. I did a bit of year normalization so that the model could have a column that clearly determines the wine's age rather than the year it was corked (2018 means 7 years old). However, after this step, is what I would consider to be the most important part of the project. Feature engineering. At this point we had an issue. Columns like 'country', 'region', and 'winery' were text items. They were categorical and XGBoost requires numerical inputs. The simple way to address this would be one-hot encoding, but that causes issues down the line. It suggests numerical inequalities between the values such as France > Spain, which could confuse the model. Instead of that I decided to pursue frequency encoding. This is where each unique value is counted and their value is updated as that number of counts. For example in a list ('France', 'Spain', 'France', 'USA', 'France'), the resulting frequency encoding would be France: 3, Spain: 1, USA: 1. That gives weight to France being a dominant value in the dataset, whereas with one-hot encoding USA would be 3, despite being less prevelant in the column. 
 \
 Another interesting part of the code was the hyperparameter tuning. I original started it off pretty modestly with a simple XGBRegressor:
@@ -45,7 +50,9 @@ param_grid = {
     'min_child_weight': [1, 3]}
 ```
 \
+\
 <ins> Conclusion </ins>
+\
 Great, with those changes and the new parameter grid, the new MAE, MSE, and R2 values were 13, 49, and 0.61. So, not bad... Not the best model I've seen for sure, but given the data, and the model chosen, I think it performed pretty well. We're differring on about $13 for our predictions, which after the $80 range is quite acceptable to me. However, it leaves a lot to be desired if we're predicting cheaper wine bottles around the $20 mark. Another point of improvement is changing from an XGBoost model to a CatBoost. We may have to do much less feature engineering, and would be able to input the categorical values to output not only a possibly more accurate model, but easier to understand one as well. 
 \
 Finally, checking for overfitting, the model peroformed fairly well. The test MAE and the train MAE are nearly identical (varying by 9 percent), which suggests that the data is not too far, but also not too identical with the training dataset.
